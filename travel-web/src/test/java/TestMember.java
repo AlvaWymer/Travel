@@ -8,11 +8,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.mldn.travel.service.back.IDeptServiceBack;
 import cn.mldn.travel.service.back.IEmpServiceBack;
+import cn.mldn.travel.service.back.impl.DeptServiceBackImpl;
+import cn.mldn.travel.service.back.impl.EmpServiceBackImpl;
 import cn.mldn.travel.vo.Dept;
 
 @ContextConfiguration(locations = {"classpath:spring/spring-common.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestMember {
+	
 	@Resource
 	private IDeptServiceBack ideptServiceBack;
 	/**
@@ -54,4 +57,14 @@ public class TestMember {
 		dept.setEid("mldn-dev3");
 		System.out.println(ideptServiceBack.updateDeptName(dept));
 	}
+	
+//	@Resource
+//	private IDeptServiceBack ideptServiceBack;
+	
+	@Test
+	public void testGet3() {
+		System.out.println(iEmpServiceBack.getInformationModal("mldn-dev1"));
+	}
+	
+	
 }

@@ -1,5 +1,8 @@
 package cn.mldn.travel.action.back;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.mldn.travel.service.back.IEmpServiceBack;
 import cn.mldn.travel.vo.Emp;
 import cn.mldn.util.action.abs.AbstractBaseAction;
 
@@ -62,12 +66,20 @@ public class EmpActionBack extends AbstractBaseAction {
 		return mav;
 	}
 
+//	根据雇员的id 查询到雇员的信息
+	@Resource
+	private IEmpServiceBack iEmpServiceBack;
 	@RequestMapping("get")
 	@RequiresUser
 	@RequiresRoles({ "emp", "empshow" })
 	@RequiresPermissions({ "emp:get", "empshow:get" })
 	public ModelAndView get(String eid, HttpServletResponse response) {
-		super.print(response, null);
+		
+//		ModelAndView mav = new ModelAndView(super.getUrl("dept.list.page"));
+//		mav.addAllObjects((Map<String, ?>) iEmpServiceBack.getEmpInfo(eid));
+////		iEmpServiceBack.getEmpInfo(eid);
+		super.print(response, iEmpServiceBack.getEmpInfo(eid));
+
 		return null;
 	}
 

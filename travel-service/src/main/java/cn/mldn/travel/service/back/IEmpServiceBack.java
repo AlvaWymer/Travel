@@ -6,10 +6,22 @@ import java.util.Set;
 import cn.mldn.travel.vo.Emp;
 
 public interface IEmpServiceBack {
+	
+	/**
+	 * 根据员工的信息查询出员工的信息
+	 * @param eid
+	 * @return 包括如下内容：<br>
+	 * 1. key="allemp",value="",要调用的方法：IEmpDAO.java 继承的IbaseDAO 中findById<br>
+	 * 2. key="alldept",value="",要调用的方法：IDeptDAO.java 继承的IbaseDAO 中findById<br>
+	 * 3. key="alllevel",value="",要调用的方法：ILevelDAO.java 继承的IbaseDAO 中findById 
+	 * 根据上面的第1个方法来查到对应的等级信息
+	 */
+	public Map<String,Object> getInformationModal(String eid) ;
+	
 	/**
 	 * 根据员工的id查询出员工的所有信息
-	 * @param eid
-	 * @return
+	 * @param eid 员工的id
+	 * @return 员工 vo
 	 */
 	public Emp getEmpInfo(String eid);
 	/**

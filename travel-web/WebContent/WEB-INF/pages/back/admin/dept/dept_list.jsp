@@ -41,7 +41,8 @@
 								
 								<c:forEach items="${allEmpManagerName}" var="emp">
 									<c:if test="${dept.eid==emp.eid}">
-									<td class="text-center"><span id="eid-7369" style="cursor:pointer;">${emp.ename}</span></td>
+									${emp.eid}
+									<td class="text-center"><span id="eid-${emp.eid} " style="cursor:pointer;">${emp.ename}</span></td>
 									
 									</c:if>
 								

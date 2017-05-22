@@ -22,6 +22,15 @@ public interface IDeptDAO extends IBaseDAO<Long, Dept> {
 	 */
 	public List<Emp> findAllManagerNameForDeptName() ;
 	
+	//```````````````````````````````````````````````````````````
+/**
+ *  根据雇员的id，查询到雇员对应的部门
+ * @param eid
+ * @return
+ */
+	public Dept findById(String eid);
+	
+	//```````````````````````````````````````````````````````````
 //	/**
 //	 * 根据 部门的id 来实现更新部门的名字
 //	 * @param did

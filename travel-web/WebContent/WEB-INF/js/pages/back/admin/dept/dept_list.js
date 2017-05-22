@@ -22,9 +22,19 @@ $(function(){
 	}) ;
 	$("span[id^=eid-]").each(function(){
 		$(this).on("click",function(){
-			eid = this.id.split("-")[1] ;
+//			eid =  this.id.split("-")[1] +this.id.split("-")[2] ;
+			eid =this.id.replace("eid-","");
 			console.log("雇员编号：" + eid) ;
+			
+//			// 编写Ajax异步更新操作
+			$.post("pages/back/admin/emp/get.action",{"eid":eid},function(data){
+//				operateAlert(data.trim() != "true","栏目信息修改成功！","栏目信息修改失败！") ;
+			},"text") ;
+			
+			
 			$("#userInfo").modal("toggle") ;
+			
+			
 		}) ;
 	}) ;
 }) ;
