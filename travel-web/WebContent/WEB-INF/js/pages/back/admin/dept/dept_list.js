@@ -30,7 +30,7 @@ $(function(){
 			$.post("pages/back/admin/emp/get.action",{"eid":eid},function(data){
 //				operateAlert(data.trim() != "true","栏目信息修改成功！","栏目信息修改失败！") ;
 //				alert(data);
-//				$("#modal-photo").attr("src","upload/goods/" + data.goods.photo) ;
+				$("#modal-photo").attr("src","upload/member/" + data.modalphoto) ;
 				$("#modal-name").text(data.modalename) ;
 				$("#modal-level").text(data.modallid) ;
 				$("#modal-dept").text(data.modaldname) ;

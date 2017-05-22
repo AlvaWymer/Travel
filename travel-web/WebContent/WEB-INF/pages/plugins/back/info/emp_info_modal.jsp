@@ -13,7 +13,7 @@
 				<div id="costBasicInfo">
 					<div class="row">
 						<div class="col-xs-3">
-							<img src="upload/member/nophoto.png" style="width:200px;">
+							<img id="modal-photo" src="upload/member/nophoto.png" style="width:200px;">
 						</div>
 						<div class="col-xs-8">
 							<table class="table table-condensed" style="width:700px;">

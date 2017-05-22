@@ -86,7 +86,11 @@ public class EmpActionBack extends AbstractBaseAction {
 		
 		JSONObject json = new JSONObject();   
 		
-		 json.put("modalename",emp.getEname());   
+		
+		
+		json.put("modalphoto",emp.getPhoto()); 
+		
+		json.put("modalename",emp.getEname()); 
 	        json.put("modallid", level.getTitle());   
 	        json.put("modaldname", dept.getDname());   
 	        json.put("modalphone", emp.getPhone());   
