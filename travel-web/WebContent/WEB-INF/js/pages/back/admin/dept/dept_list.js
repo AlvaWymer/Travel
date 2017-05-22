@@ -29,7 +29,16 @@ $(function(){
 //			// 编写Ajax异步更新操作
 			$.post("pages/back/admin/emp/get.action",{"eid":eid},function(data){
 //				operateAlert(data.trim() != "true","栏目信息修改成功！","栏目信息修改失败！") ;
-			},"text") ;
+//				alert(data);
+//				$("#modal-photo").attr("src","upload/goods/" + data.goods.photo) ;
+				$("#modal-name").text(data.modalename) ;
+				$("#modal-level").text(data.modallid) ;
+				$("#modal-dept").text(data.modaldname) ;
+				$("#modal-tel").text(data.modalphone) ;
+//				$("#modal-mid").text(data.goods.mid) ;
+				$("#modal-date").text(data.modalhiredate) ;
+				$("#modal-note").html(data.modalenote) ;
+			},"json") ;
 			
 			
 			$("#userInfo").modal("toggle") ;

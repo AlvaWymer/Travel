@@ -1,6 +1,6 @@
 package cn.mldn.travel.action.back;
 
-import java.util.Map;
+import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.travel.service.back.IEmpServiceBack;
+import cn.mldn.travel.vo.Dept;
 import cn.mldn.travel.vo.Emp;
+import cn.mldn.travel.vo.Level;
 import cn.mldn.util.action.abs.AbstractBaseAction;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/pages/back/admin/emp/*")
@@ -71,16 +74,35 @@ public class EmpActionBack extends AbstractBaseAction {
 	private IEmpServiceBack iEmpServiceBack;
 	@RequestMapping("get")
 	@RequiresUser
-	@RequiresRoles({ "emp", "empshow" })
-	@RequiresPermissions({ "emp:get", "empshow:get" })
+//	@RequiresRoles({ "emp", "empshow" })
+//	@RequiresPermissions({ "emp:get", "empshow:get" })
 	public ModelAndView get(String eid, HttpServletResponse response) {
-		
-//		ModelAndView mav = new ModelAndView(super.getUrl("dept.list.page"));
-//		mav.addAllObjects((Map<String, ?>) iEmpServiceBack.getEmpInfo(eid));
-////		iEmpServiceBack.getEmpInfo(eid);
-		super.print(response, iEmpServiceBack.getEmpInfo(eid));
+		System.out.println("0000000000"+iEmpServiceBack.getInformationModal(eid));
 
-		return null;
+		SimpleDateFormat simple=new SimpleDateFormat("yyyy-MM-dd");
+		Emp emp =(Emp) this.iEmpServiceBack.getInformationModal(eid).get("allemp");
+		Dept dept = (Dept) this.iEmpServiceBack.getInformationModal(eid).get("alldept");
+		Level level = (Level) this.iEmpServiceBack.getInformationModal(eid).get("alllevel");
+		
+		JSONObject json = new JSONObject();   
+		
+		 json.put("modalename",emp.getEname());   
+	        json.put("modallid", level.getTitle());   
+	        json.put("modaldname", dept.getDname());   
+	        json.put("modalphone", emp.getPhone());   
+	        json.put("modalhiredate", simple.format(emp.getHiredate()).toString()); 
+	        json.put("modalenote", emp.getNote()); 
+			super.print(response, json);
+			return null;
+
+		
+		
+	
+
+//		super.print(response, json.put("json",iEmpServiceBack.getInformationModal(eid)));
+//		
+//
+//		return null;
 	}
 
 	@RequestMapping("list")
