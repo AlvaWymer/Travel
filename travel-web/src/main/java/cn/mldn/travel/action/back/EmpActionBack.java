@@ -74,39 +74,28 @@ public class EmpActionBack extends AbstractBaseAction {
 	private IEmpServiceBack iEmpServiceBack;
 	@RequestMapping("get")
 	@RequiresUser
-//	@RequiresRoles({ "emp", "empshow" })
-//	@RequiresPermissions({ "emp:get", "empshow:get" })
+	@RequiresRoles(value = { "emp", "empshow" }, logical = Logical.OR)
+	@RequiresPermissions(value = { "emp:get", "empshow:get" }, logical = Logical.OR)
 	public ModelAndView get(String eid, HttpServletResponse response) {
-		System.out.println("0000000000"+iEmpServiceBack.getInformationModal(eid));
-
+//		System.out.println("0000000000"+iEmpServiceBack.getInformationModal(eid));
+System.out.println("!!!!!!!!!!!!!!!!!!!!!"+super.getEid()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		SimpleDateFormat simple=new SimpleDateFormat("yyyy-MM-dd");
 		Emp emp =(Emp) this.iEmpServiceBack.getInformationModal(eid).get("allemp");
 		Dept dept = (Dept) this.iEmpServiceBack.getInformationModal(eid).get("alldept");
 		Level level = (Level) this.iEmpServiceBack.getInformationModal(eid).get("alllevel");
 		
 		JSONObject json = new JSONObject();   
-		
-		
-		
-		json.put("modalphoto",emp.getPhoto()); 
-		
-		json.put("modalename",emp.getEname()); 
+			json.put("modalphoto",emp.getPhoto()); 
+			json.put("modaleEname",emp.getEname()); 
 	        json.put("modallid", level.getTitle());   
-	        json.put("modaldname", dept.getDname());   
+	        json.put("modaldDname", dept.getDname());   
 	        json.put("modalphone", emp.getPhone());   
 	        json.put("modalhiredate", simple.format(emp.getHiredate()).toString()); 
 	        json.put("modalenote", emp.getNote()); 
 			super.print(response, json);
 			return null;
 
-		
-		
-	
 
-//		super.print(response, json.put("json",iEmpServiceBack.getInformationModal(eid)));
-//		
-//
-//		return null;
 	}
 
 	@RequestMapping("list")

@@ -6,11 +6,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.context.MessageSource;
 
 public abstract class AbstractBaseAction {
 	@Resource
 	private MessageSource messageSource;
+	
+//	获取当前的用户的id
+	public String getEid() {
+		return SecurityUtils.getSubject().getPrincipal().toString() ;
+	}
 	
 	public void setUrlAndMsg(HttpServletRequest request ,String urlKey,String msgKey,Object...arg) {
 		request.setAttribute("msg", this.getMsg(msgKey, arg));

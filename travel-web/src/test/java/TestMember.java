@@ -66,5 +66,10 @@ public class TestMember {
 		System.out.println(iEmpServiceBack.getInformationModal("mldn-dev1"));
 	}
 	
+	@Test
+	public void testGet4() {
+		System.out.println(ideptServiceBack.updateDeptNameAndManager(7l,"mldn-human"));
+	}
+	
 	
 }
