@@ -41,7 +41,7 @@
 
 
 							<c:forEach items="${allDeptName}" var="dept">
-${dept.did}
+
 								<tr>
 									<td class="text-center">
 									<!-------------------------------------->
@@ -52,7 +52,7 @@ ${dept.did}
 									<shiro:lacksPermission name="dept:edit"> ${dept.dname} </shiro:lacksPermission>
 									<!-------------------------------------->
 									<!-- 对应的部门领导 -->
-									<td class="text-center">
+									<td class="text-center" id="mgr-${dept.did}">
 									<!--  !!注意：【alt】  是自定义属性，这是为了当点击 部门所对应的经理的姓名的时候，
 									往模态窗口 里面传递did（部门id）详见：dept_list.js-->
 									<span id="eid-${dept.eid}" style="cursor: pointer;" alt="${dept.did}">${allEmpManagerName[dept.eid]}</span></td>
