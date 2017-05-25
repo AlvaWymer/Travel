@@ -41,7 +41,7 @@
 								<label class="col-md-3 control-label" for="password">登录密码：</label>
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
-									<input type="text" id="password" name="password" class="form-control"
+									<input type="password" id="password" name="password" class="form-control"
 										placeholder="请输入雇员登录密码">
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -58,6 +58,20 @@
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="enameMsg">${errors['ename']}</div>
 							</div>
+							
+							<div class="form-group" id="salDiv">
+								<!-- 定义表单提示文字 -->
+								<label class="col-md-3 control-label" for="sal">雇员收入：</label>
+								<div class="col-md-5">
+									<!-- 定义表单输入组件 -->
+									<input type="text" id="sal" name="sal" class="form-control"
+										placeholder="请输入雇员的收入">
+								</div>
+								<!-- 定义表单错误提示显示元素 -->
+								<div class="col-md-4" id="salMsg">${errors['sal']}</div>
+							</div>
+							
+							
 							<div class="form-group" id="phoneDiv">
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="phone">联系电话：</label>
@@ -75,23 +89,38 @@
 								<div class="col-md-5">
 									<select id="did" name="did" class="form-control">
 										<option value="">====== 请选择所在部门 ======</option>
-										<option value="1">技术部</option>
-										<option value="2">财务部</option>
-										<option value="3">市场部</option>
+<!-- 注意：此处，没有使用ajax，而是使用系统内置的，直接action返回modelandView，而modelAndView里面使用
+的是addAllObjects方法，而且里面包含的是map集合，详见EmpActionBack.addPre()方法  ，map集合里面一共包含：
+返回的结果里面一共包含两个，
+1.一个是要返回的部门列表，(allDepts---返回的dept列表)
+2.一个是要返回的职务列表，(allLevels--- 返回的等级列表)
+-->
+									<c:forEach items="${allDepts}" var="dept">
+										<option value="${dept.did}">${dept.dname}</option>
+									</c:forEach>
+									<!-- 	 <option value="1">技术部</option>
+										
+										<option value="3">市场部</option>  -->
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="didMsg">${errors['did']}</div>
 							</div>
-							<div class="form-group" id="jidDiv">
+							<div class="form-group" id="lidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="jid">出差类型：</label>
+								<label class="col-md-3 control-label" for="lid">雇员职务：</label>
 								<div class="col-md-5">
-									<select id="jid" name="jid" class="form-control">
+								<%-- <h1>${level}</h1> --%>
+									<select id="lid" name="lid" class="form-control">
 										<option value="">====== 请选择雇员职务 ======</option>
-										<option value="1">总监</option>
-										<option value="2">部门经理</option>
-										<option value="3">部门员工</option>
+										<c:forEach items="${allLevels}" var="lev">
+										<!--根据当前操作者的职务等级列出当前操作者对应的能够添加的职务等级  -->
+										<c:if test="${lev.level ge level}">
+												<option value="${lev.lid}" ${"staff" == lev.lid ? "selected" : ""}>${lev.title}</option>
+											</c:if>
+										</c:forEach>
+										<!-- <option value="2">部门经理</option>
+										<option value="3">部门员工</option> -->
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
